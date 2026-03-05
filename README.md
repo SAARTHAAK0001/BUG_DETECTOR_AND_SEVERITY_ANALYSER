@@ -1,20 +1,20 @@
-# 🐞 Bug Detector and Severity Analyser
+# Bug Detector and Severity Analyser
 
 An AI-powered backend system that analyzes bug reports and predicts their severity using LLM-based classification.
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🧠 LLM-based bug severity prediction
-- 📦 Structured FastAPI backend
-- 🗄 Database integration
-- 🔐 Environment-based configuration
-- 🧪 Clean project structure
+- LLM-based bug severity prediction
+- Structured FastAPI backend
+- Database integration
+- Environment-based configuration
+- Clean project structure
 
 ---
 
-## 🏗 Project Structure
+## Project Structure
 app/
 │
 
@@ -38,9 +38,9 @@ README.md
 
 ---
 
-## ⚙️ Installation
+## Installation
 
-### 1️⃣ Clone the repository
+### 1️) Clone the repository
 
 ```bash
 git clone https://github.com/SAARTHAAK0001/BUG_DETECTOR_AND_SEVERITY_ANALYSER.git
@@ -76,7 +76,7 @@ FALLBACK_SEVERITY="medium"
 
 > If `LLM_API_KEY` is empty, app automatically uses rule-based fallback.
 
-## ▶️ Run the API
+## Run the API
 
 ```bash
 uvicorn app.main:app --reload
@@ -84,7 +84,7 @@ uvicorn app.main:app --reload
 
 Open interactive docs: `http://127.0.0.1:8000/docs`
 
-## 📡 API Endpoints
+## API Endpoints
 
 - `GET /health`
 - `POST /bugs/analyze`
@@ -116,7 +116,7 @@ curl -X POST "http://127.0.0.1:8000/bugs/analyze" \
 }
 ```
 
-## 🧪 Quick checks
+## Quick checks
 
 ```bash
 python -m compileall app

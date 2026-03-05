@@ -17,12 +17,19 @@ An AI-powered backend system that analyzes bug reports and predicts their severi
 ## 🏗 Project Structure
 app/
 │
+
 ├── main.py # FastAPI entry point
+
 ├── config.py # Environment configuration
+
 ├── database.py # Database setup
+
 ├── models.py # ORM models
+
 ├── schemas.py # Pydantic schemas
+
 ├── crud.py # Database operations
+
 └── llm_service.py # LLM integration logic
 
 requirements.txt

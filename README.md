@@ -129,49 +129,71 @@ python -c "from app.main import app; print(app.title)"
 The system follows a layered backend architecture designed for modularity and scalability.
 
 Client Application
+
         │
         ▼
+        
 FastAPI Backend (main.py)
+
         │
         ▼
+        
 API Layer (Request Validation - Pydantic Schemas)
+
         │
         ▼
+        
 Service Layer (LLM Severity Prediction)
+
         │
         ├── LLM Provider (OpenAI or others)
         └── Rule-Based Fallback
         │
         ▼
+        
 Data Access Layer (CRUD Operations)
+
         │
         ▼
+        
 Database Layer (SQLite / PostgreSQL)
 
 
 ## API Lifecycle
 Client Application
+
         │
         │ POST /bugs/analyze
         ▼
+        
 FastAPI Endpoint
+
         │
         ▼
+        
 Request Validation
+
         │
         ▼
+        
 Severity Analysis (LLM Service)
+
         │
         ├── LLM API Call
         └── Rule-Based Fallback
         │
         ▼
+        
 Prediction Result
+
         │
         ▼
+        
 Database Storage
+
         │
         ▼
+        
 API Response
 
 

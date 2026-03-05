@@ -16,6 +16,7 @@ An AI-powered backend system that analyzes bug reports and predicts their severi
 
 ## Project Structure
 app/
+
 │
 
 ├── main.py # FastAPI entry point

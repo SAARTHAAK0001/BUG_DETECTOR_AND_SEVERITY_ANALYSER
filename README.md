@@ -125,3 +125,74 @@ python -c "from app.main import app; print(app.title)"
 ```
 
 
+## System Architecture Design
+The system follows a layered backend architecture designed for modularity and scalability.
+
+Client Application
+        │
+        ▼
+FastAPI Backend (main.py)
+        │
+        ▼
+API Layer (Request Validation - Pydantic Schemas)
+        │
+        ▼
+Service Layer (LLM Severity Prediction)
+        │
+        ├── LLM Provider (OpenAI or others)
+        └── Rule-Based Fallback
+        │
+        ▼
+Data Access Layer (CRUD Operations)
+        │
+        ▼
+Database Layer (SQLite / PostgreSQL)
+
+
+## API Lifecycle
+Client Application
+        │
+        │ POST /bugs/analyze
+        ▼
+FastAPI Endpoint
+        │
+        ▼
+Request Validation
+        │
+        ▼
+Severity Analysis (LLM Service)
+        │
+        ├── LLM API Call
+        └── Rule-Based Fallback
+        │
+        ▼
+Prediction Result
+        │
+        ▼
+Database Storage
+        │
+        ▼
+API Response
+
+
+## Agile Workflow Integration
+Bug Reporting Stage
+Bug reports submitted by testers or users can be automatically analyzed and assigned severity levels before entering the backlog.
+
+Sprint Planning
+Predicted severity levels help teams prioritize high-impact issues during backlog grooming and sprint planning.
+
+CI/CD Integration
+Automated testing pipelines can send failure reports to the API for severity classification, allowing automated issue prioritization in development workflows.
+
+
+## Future Enhancements
+- Integration with GitHub Issues and Jira
+- Training custom ML models using historical bug data
+- Analytical dashboards for bug severity trends
+- CI/CD pipeline automation
+- Support for multiple LLM providers
+
+
+## License
+MIT License

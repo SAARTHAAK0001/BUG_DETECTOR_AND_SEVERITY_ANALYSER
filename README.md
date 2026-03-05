@@ -1,57 +1,71 @@
-Bug Detector and Severity Analyser
-Overview
-An AI-powered backend service that analyzes software bug reports and predicts their severity using large language model (LLM)–based classification.
+# Bug Detector and Severity Analyser
 
-The system is designed to support software engineering teams by automating part of the bug triaging process, enabling faster prioritization and more efficient issue management within development workflows.
+An AI-powered backend system that analyzes bug reports and predicts their severity using LLM-based classification.
 
-This project demonstrates the integration of modern AI services with backend engineering practices, including modular architecture, API-driven design, and environment-based configuration.
+---
 
-Key Capabilities
-- Automated bug severity prediction using LLM-based analysis
-- FastAPI backend for scalable API deployment
-- Database integration for persistent bug storage
-- Modular architecture aligned with maintainable backend engineering practices
-- Environment-driven configuration for flexible deployment
-- Rule-based fallback classification when LLM services are unavailable
+## Features
 
-Project Structure
+- LLM-based bug severity prediction
+- Structured FastAPI backend
+- Database integration
+- Environment-based configuration
+- Clean project structure
+
+---
+
+## Project Structure
 app/
 
-├── main.py           FastAPI application entry point
-├── config.py         Environment and configuration management
-├── database.py       Database initialization and connection
-├── models.py         ORM data models
-├── schemas.py        Pydantic schemas for request validation
-├── crud.py           Database interaction logic
-└── llm_service.py    LLM integration and severity prediction logic
+│
+
+├── main.py # FastAPI entry point
+
+├── config.py # Environment configuration
+
+├── database.py # Database setup
+
+├── models.py # ORM models
+
+├── schemas.py # Pydantic schemas
+
+├── crud.py # Database operations
+
+└── llm_service.py # LLM integration logic
 
 requirements.txt
 .gitignore
 README.md
 
-Installation
-1. Clone the Repository
+---
 
+## Installation
+
+### 1️) Clone the repository
+
+```bash
 git clone https://github.com/SAARTHAAK0001/BUG_DETECTOR_AND_SEVERITY_ANALYSER.git
 cd BUG_DETECTOR_AND_SEVERITY_ANALYSER
+```
 
-2. Create and Activate Virtual Environment
+### 2) Create and activate virtual environment
 
-Linux / macOS
+```bash
 python -m venv .venv
 source .venv/bin/activate
+```
 
-Windows
-python -m venv .venv
-.venv\Scripts\activate
+### 3) Install dependencies
 
-3. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
-4. Configure Environment Variables
+### 4) Configure environment
 
-Create a .env file in the project root:
+Create `.env` in project root:
 
+```env
 APP_NAME="Bug Detector and Severity Analyser"
 ENVIRONMENT="development"
 DATABASE_URL="sqlite:///./bugs.db"
@@ -59,104 +73,55 @@ LLM_PROVIDER="openai"
 LLM_API_KEY=""
 LLM_MODEL="gpt-4o-mini"
 FALLBACK_SEVERITY="medium"
+```
 
-Running the API
-Start the application server:
+> If `LLM_API_KEY` is empty, app automatically uses rule-based fallback.
 
+## Run the API
+
+```bash
 uvicorn app.main:app --reload
+```
 
-Interactive API documentation is available at:
-http://127.0.0.1:8000/docs
+Open interactive docs: `http://127.0.0.1:8000/docs`
 
-API Endpoints
-GET /health          Service health check
-POST /bugs/analyze     Analyze bug description and predict severity
-GET /bugs/{bug_id}     Retrieve stored bug report
+## API Endpoints
 
-Example Request
-POST /bugs/analyze
+- `GET /health`
+- `POST /bugs/analyze`
+- `GET /bugs/{bug_id}`
 
+### Example request
+
+```bash
+curl -X POST "http://127.0.0.1:8000/bugs/analyze" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Checkout fails with 500",
+    "description": "Users cannot place orders. Payment request returns HTTP 500 in production."
+  }'
+```
+
+### Example response
+
+```json
 {
-"title": "Checkout fails with 500",
-"description": "Users cannot place orders. Payment request returns HTTP 500 in production."
+  "bug": {
+    "id": 1,
+    "title": "Checkout fails with 500",
+    "description": "Users cannot place orders. Payment request returns HTTP 500 in production.",
+    "predicted_severity": "high",
+    "model_used": "rule-based-fallback",
+    "created_at": "2026-01-01T10:00:00.000000"
+  }
 }
+```
 
-Example Response
-{
-"bug": {
-"id": 1,
-"title": "Checkout fails with 500",
-"description": "Users cannot place orders. Payment request returns HTTP 500 in production.",
-"predicted_severity": "high",
-"model_used": "rule-based-fallback",
-"created_at": "2026-01-01T10:00:00.000000"
-}
-}
+## Quick checks
 
-System Architecture Design
-The system follows a layered backend architecture designed for modularity and scalability.
+```bash
+python -m compileall app
+python -c "from app.main import app; print(app.title)"
+```
 
-Client Application
-        │
-        ▼
-FastAPI Backend (main.py)
-        │
-        ▼
-API Layer (Request Validation - Pydantic Schemas)
-        │
-        ▼
-Service Layer (LLM Severity Prediction)
-        │
-        ├── LLM Provider (OpenAI or others)
-        └── Rule-Based Fallback
-        │
-        ▼
-Data Access Layer (CRUD Operations)
-        │
-        ▼
-Database Layer (SQLite / PostgreSQL)
 
-API Lifecycle
-Client Application
-        │
-        │ POST /bugs/analyze
-        ▼
-FastAPI Endpoint
-        │
-        ▼
-Request Validation
-        │
-        ▼
-Severity Analysis (LLM Service)
-        │
-        ├── LLM API Call
-        └── Rule-Based Fallback
-        │
-        ▼
-Prediction Result
-        │
-        ▼
-Database Storage
-        │
-        ▼
-API Response
-
-Agile Workflow Integration
-Bug Reporting Stage
-Bug reports submitted by testers or users can be automatically analyzed and assigned severity levels before entering the backlog.
-
-Sprint Planning
-Predicted severity levels help teams prioritize high-impact issues during backlog grooming and sprint planning.
-
-CI/CD Integration
-Automated testing pipelines can send failure reports to the API for severity classification, allowing automated issue prioritization in development workflows.
-
-Future Enhancements
-- Integration with GitHub Issues and Jira
-- Training custom ML models using historical bug data
-- Analytical dashboards for bug severity trends
-- CI/CD pipeline automation
-- Support for multiple LLM providers
-
-License
-MIT License

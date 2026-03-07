@@ -129,13 +129,15 @@ python -c "from app.main import app; print(app.title)"
 The system follows a layered backend architecture designed for modularity and scalability.
 
 Client Application
+"
         │
         ▼
+"        
 FastAPI Backend (main.py)
-
+"
         │
         ▼
-        
+"      
 API Layer (Request Validation - Pydantic Schemas)
 
         │

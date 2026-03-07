@@ -128,7 +128,7 @@ python -c "from app.main import app; print(app.title)"
 ## System Architecture Design
 The system follows a layered backend architecture designed for modularity and scalability.
 
-'''bash
+
 Client Application
 
         │
@@ -196,7 +196,7 @@ Database Storage
         ▼
         
 API Response
-'''
+
 
 ## Agile Workflow Integration
 Bug Reporting Stage
